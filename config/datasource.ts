@@ -11,7 +11,7 @@ const appDataSource = new DataSource({
     username: environment.dbUsername,
     password: environment.dbPassword,
     synchronize: true,
-    logging: true,
+    logging: false,
     entities: [Club, Player],
     subscribers: [],
     migrations: []

@@ -2,6 +2,7 @@ import express, {Express, Request, Response} from 'express';
 
 import appDataSource from '../config/datasource';
 import Club from '../entities/clubs';
+import { validateNewClub } from '../validators/clubValidator';
 
 const baseUrl = '/api/club';
 const clubRepository = appDataSource.getRepository(Club);
@@ -13,7 +14,7 @@ clubRouter.get(`${baseUrl}/`, async (req: Request, res: Response) => {
     res.json(allClubs);
 })
 
-clubRouter.post(`${baseUrl}/`, async (req: Request, res: Response) => {
+clubRouter.post(`${baseUrl}/`, validateNewClub, async (req: Request, res: Response) => {
     const incomingData = {
         name: req.body.name,
         established: new Date()
