@@ -1,26 +1,26 @@
 import express, {Express, Request, Response} from 'express';
 
-import appDataSource from '../config/datasource';
-import Club from '../entities/clubs';
+import { clubRepository } from '../repositories/repositories';
 import { validateNewClub } from '../validators/clubValidator';
 
 const baseUrl = '/api/club';
-const clubRepository = appDataSource.getRepository(Club);
 const clubRouter = express.Router();
 
+// palauta kaikki klubit
 clubRouter.get(`${baseUrl}/`, async (req: Request, res: Response) => {
     const allClubs = await clubRepository.find();
 
     res.json(allClubs);
 })
 
+// lisää uusi klubi
 clubRouter.post(`${baseUrl}/`, validateNewClub, async (req: Request, res: Response) => {
-    const incomingData = {
+    const newClub = {
         name: req.body.name,
         established: new Date()
     }
 
-    const result = await clubRepository.save(incomingData);
+    const result = await clubRepository.save(newClub);
 
     res.json(result);
 })
