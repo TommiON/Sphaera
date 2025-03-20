@@ -1,8 +1,8 @@
 import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from "typeorm";
-import Player from "./players";
+import PlayerEntity from "./player.entity";
 
-@Entity()
-class Club {
+@Entity('club')
+class ClubEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -12,8 +12,8 @@ class Club {
     @Column()
     established: Date ;
 
-    @OneToMany(() => Player, (player) => player.club)
-    players: [Player];
+    @OneToMany(() => PlayerEntity, (player) => player.club)
+    players: [PlayerEntity];
 }
 
-export default Club;
+export default ClubEntity;

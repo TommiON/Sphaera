@@ -1,10 +1,6 @@
 import express, {Express, Request, Response} from 'express';
 
-import appDataSource from '../config/datasource';
-import Club from '../entities/clubs';
-
-const clubRepository = appDataSource.getRepository(Club);
-
+import { clubRepository } from '../repositories/repositories';
 
 export const validateNewClub = async (req: Request, res: Response, next: express.NextFunction) => {
     const existingClubs = await clubRepository.find({ where: { name: req.body.name }});

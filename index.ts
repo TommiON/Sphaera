@@ -5,6 +5,7 @@ import environment from "./config/environment";
 import appDataSource from "./config/datasource";
 import healthCheckRouter from "./routes/healthCheckRoutes";
 import clubRouter from "./routes/clubRoutes";
+import playerRouter from "./routes/playerRoutes";
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 
 app.use(healthCheckRouter);
 app.use(clubRouter);
+app.use(playerRouter);
 
 const start = () => {
     appDataSource.initialize()
