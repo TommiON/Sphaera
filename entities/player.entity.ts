@@ -17,6 +17,51 @@ class PlayerEntity {
     @Column()
     footedness: Footedness
 
+    @Column()
+    stamina: number
+
+    @Column()
+    ruggedness: number
+
+    @Column()
+    pace: number
+
+    @Column()
+    vision: number;
+    
+    @Column()
+    positioning: number;
+    
+    @Column()
+    experience: number;
+
+    @Column()
+    heading: number;
+    
+    @Column()
+    shooting: number;
+    
+    @Column()
+    shortPassing: number;
+    
+    @Column()
+    longPassing: number;
+    
+    @Column()
+    ballControl: number;
+    
+    @Column()
+    tackling: number;
+    
+    @Column()
+    goalkeeping: number;
+    
+    @Column()
+    dribbling: number;
+
+    @Column({nullable: true})
+    trait: string;
+
     @ManyToOne(() => ClubEntity, (club) => club.players)
     club: ClubEntity;
 }

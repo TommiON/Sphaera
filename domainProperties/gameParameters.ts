@@ -1,4 +1,8 @@
 export default {
-    numberOfPlayersAtStart: 11,
-    skillCeilingAtStart: 5
+    CLUB_NUMBER_OF_PLAYERS_AT_START: 11,
+    
+    PLAYER_SKILL_CEILING_AT_START: 5,
+    PLAYER_PROPABILITY_OF_TRAIT: 0.2,
+    PLAYER_MIN_AGE_AT_START: 15,
+    PLAYER_MAX_AGE_AT_START: 20
 }
