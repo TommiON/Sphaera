@@ -17,16 +17,17 @@ export const initAndSaveClub = async (proposedName: string): Promise<Club> => {
     const savedClub = await clubRepository.save(club) as ClubEntity;
 
     for (let i = 0; i < gameParameters.CLUB_NUMBER_OF_PLAYERS_AT_START; i++) {
-        await initAndSavePlayerForClub(savedClub);
+        await initAndSavePlayerForClub(savedClub, i+1);
     }
 
     return club;
 }
 
-const initAndSavePlayerForClub = async (club: ClubEntity) => {
+const initAndSavePlayerForClub = async (club: ClubEntity, runningPlayingNumber: number) => {
     const savedPlayer = await playerRepository.save({
         name:           getRandomElement(possibleFirstNames) + ' ' + getRandomElement(possibleLastNames),
         birthday:       generateBirthday(),
+        playingNumber:  runningPlayingNumber,
         footedness:     getRandomElement(['right', 'left', 'both'], [80, 95]),
         stamina:        getRandomNumberInRange(1, gameParameters.PLAYER_SKILL_CEILING_AT_START),
         ruggedness:     getRandomNumberInRange(1, gameParameters.PLAYER_SKILL_CEILING_AT_START),

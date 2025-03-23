@@ -4,6 +4,7 @@ import Trait from "./trait";
 export default interface Player {
     name: string;
     birthday: Date;
+    playingNumber: number;
 
     footedness: Footedness;
 
@@ -25,5 +26,4 @@ export default interface Player {
     dribbling: number;
 
     traits: Trait[];
-
 }

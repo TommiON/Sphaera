@@ -15,6 +15,9 @@ class PlayerEntity {
     birthday: Date
 
     @Column()
+    playingNumber: number
+
+    @Column()
     footedness: Footedness
 
     @Column()
