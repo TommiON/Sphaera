@@ -1,4 +1,5 @@
 import Footedness from "./footedness";
+import Trait from "./trait";
 
 export default interface Player {
     name: string;
@@ -10,7 +11,6 @@ export default interface Player {
     ruggedness: number;
     pace: number;
 
-    /*
     vision: number;
     positioning: number;
     experience: number;
@@ -23,5 +23,7 @@ export default interface Player {
     tackling: number;
     goalkeeping: number;
     dribbling: number;
-    */
+
+    traits: Trait[];
+
 }
