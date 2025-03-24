@@ -23,6 +23,7 @@ clubRouter.post(`${baseUrl}/`, validateNewClub, async (req: Request, res: Respon
 // palauta pelaajat
 // mutta jos tää on täällä, mikä itse asiassa player-routterin idea?
 clubRouter.get(`${baseUrl}/players`, async (req: Request, res: Response) => {
+    console.log('* Tuleeko pyyntö sisään? ', req)
     const players = await clubRepository.createQueryBuilder().relation(ClubEntity, 'players').of(req.body.clubId).loadMany();
     res.json(players);
 })
