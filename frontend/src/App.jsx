@@ -10,7 +10,7 @@ function App() {
   return (
     <>
       <div>
-        <Players />
+        <Players clubId={1}/>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>

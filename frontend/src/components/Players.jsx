@@ -1,20 +1,20 @@
 import axios from 'axios';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import Player from './Player';
 
-const Players = () => {
-    console.log('no mitä vittua!')
-    let playerdata;
+const Players = ({ clubId }) => {
+    const [players, setPlayers] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:3000/api/club/players', { params: { "clubId": 2 } })
+        axios.get(`http://localhost:3000/api/club/${clubId}/players`)
             .then(result => {
-                playerdata = result
-                console.log('tuleeks täältä jotain?', playerdata)
+                setPlayers(result.data);
             });
-    })
+    }, []);
 
     return(
         <div>
             <h1>Pelaajat</h1>
+            {players.map(player => <Player playerData={player} key={player.id} />)}
         </div>
     )
 }
