@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const Player = ({ playerData }) => {
-    const [minified, setMinified] = useState(true);
+    const [minified, setMinified] = useState<boolean>(true);
 
-    const resolveFootedness = (footedness) => {
+    const fullTextForFootedness = (footedness: string) => {
         switch (footedness) {
             case 'left':
                 return 'left-footed';
@@ -20,17 +20,16 @@ const Player = ({ playerData }) => {
         return(
             <div>
                 #{playerData.playingNumber} {playerData.name}
-                <button onClick={() => setMinified(!minified) }>
+                <button onClick={() => setMinified(!minified)}>
                     ...
                 </button>
-                
             </div>
         )
     } else {
         return(
             <div>
                 #{playerData.playingNumber} {playerData.name}
-                <button onClick={() => setMinified(!minified) }>
+                <button onClick={() => setMinified(!minified)}>
                     ^
                 </button>
                 <table>
@@ -44,15 +43,15 @@ const Player = ({ playerData }) => {
                         <th>{playerData.pace}</th>
                     </tr>
                     <tr>
-                        {resolveFootedness(playerData.footedness)}
+                        <th>
+                            {fullTextForFootedness(playerData.footedness)}
+                        </th>
                     </tr>
                     </tbody>
                 </table>
             </div>
         )
     }
-    
-
 }
 
 export default Player;
