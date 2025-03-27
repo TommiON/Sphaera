@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import Player from './Player';
 
-const Players = ({ clubId }) => {
+const Players = ({clubId}: {clubId: number}) => {
     const [players, setPlayers] = useState([]);
     useEffect(() => {
         axios.get(`http://localhost:3000/api/club/${clubId}/players`)
