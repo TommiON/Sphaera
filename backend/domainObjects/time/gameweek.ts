@@ -15,25 +15,25 @@ class Gameweek {
         this.deadlines.push({
             kind: 'finances',
             due: currentMomentPlusGameDays(2),
-            expirationCallback: () => console.log('Paukahti talousdedis')
+            expirationCallback: () => {}
         });
 
         this.deadlines.push({
             kind: 'transfer',
             due: currentMomentPlusGameDays(3),
-            expirationCallback: () => console.log('Paukahti siirtodedis')
+            expirationCallback: () => {}
         });
 
         this.deadlines.push({
             kind: 'training',
             due: currentMomentPlusGameDays(4),
-            expirationCallback: () => console.log('Paukahti treenidedis')
+            expirationCallback: () => {}
         });
 
         this.deadlines.push({
             kind: 'match',
             due: currentMomentPlusGameDays(6),
-            expirationCallback: () => console.log('Paukahti otteludedis')
+            expirationCallback: () => {}
         });
     }
 }

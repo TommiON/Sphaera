@@ -22,10 +22,8 @@ export const startScheduler = () => {
 }
 
 const buildNextWeek = () => {
-    let nextWeek = new Gameweek(weekIndexing);
-    gameweeks.push(nextWeek);
+    gameweeks.push(new Gameweek(weekIndexing));
     weekIndexing++;
-    console.log('Alkaa uusi viikko: ', getCurrentGameweek());
 }
 
 export const getCurrentGameweek = (): Gameweek => {
