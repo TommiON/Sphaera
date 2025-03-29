@@ -6,12 +6,13 @@ import gameParameters from "../../domainProperties/gameParameters";
 import { possibleLastNames, possibleFirstNames } from "../../domainProperties/nameConstants";
 import { getRandomElement, getRandomNumberInRange } from "../../utils/randomizer";
 import { transformEnumIntoStringList } from "../../utils/generalHelperFunctions";
+import { currentMoment } from "../../utils/timeUtils";
 import Trait from "../../domainObjects/player/trait";
 
 export const initAndSaveClub = async (proposedName: string): Promise<Club> => {
     let club = { 
         name: proposedName, 
-        established: new Date()
+        established: currentMoment()
     };
     
     const savedClub = await clubRepository.save(club) as ClubEntity;
