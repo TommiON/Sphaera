@@ -1,24 +1,28 @@
 import React from "react";
 
+import { formatDeadline } from "../utils/timeUtils";
+
 const Deadline = ( { entry }) => {
 
     let description;
     switch (entry.kind) {
         case 'finances':
-            description = 'Budjetti'
+            description = 'Budjetti';
+            break;
         case 'training':
-            description = 'Harjoittelu'
+            description = 'Harjoittelu';
+            break;
         case 'transfer':
-            description = 'Pelaajasiirrot'
+            description = 'Pelaajasiirrot';
+            break;
         case 'match':
-            description = 'Seuraava ottelu'
-        default:
-            description = 'täh'
+            description = 'Ottelu';
+            break;
     }
 
     return(
         <div>
-            <p>{description}</p>
+            <p><a href="#">{description}</a> {formatDeadline(entry.due)} </p>
         </div>
     )
 }
