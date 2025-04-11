@@ -1,19 +1,24 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { useState } from 'react'
+import { Container, Row, Col } from 'react-bootstrap';
+
 import Players from './components/Players'
+import Deadlines from './components/Deadlines'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <div className="container">
-      <div className="card">
-        <Players clubId={1}/>
-      </div>
-     
-    </div>
+    <Container fluid>
+      <Row>
+        <Col>
+          <Players clubId={1}/>
+        </Col>
+        <Col>
+          <Deadlines />
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

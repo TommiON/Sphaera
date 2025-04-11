@@ -1,21 +1,25 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Stack } from 'react-bootstrap';
+
 import Player from './Player';
 
 const Players = ({clubId}: {clubId: number}) => {
+    
     const [players, setPlayers] = useState([]);
+
     useEffect(() => {
         axios.get(`http://localhost:3000/api/club/${clubId}/players`)
-            .then(result => {
-                setPlayers(result.data);
-            });
-    }, []);
+            .then(result => setPlayers(result.data))
+            .catch(error => console.log('Virhe haettaessa pelaajia: ', error));
+        },
+    []);
 
     return(
-        <div>
-            <h1>Pelaajat</h1>
+        <Stack>
+            <h4>Pelaajat</h4>
             {players.map(player => <Player playerData={player} key={player.id} />)}
-        </div>
+        </Stack>
     )
 }
 
