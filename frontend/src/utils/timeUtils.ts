@@ -5,7 +5,6 @@ const DAY_IN_MILLISECONDS = HOUR_IN_MILLISECONDS * 24;
 export const formatDeadline = (rawDeadline: string): string => {
     const deadline =  new Date(Date.parse(rawDeadline));
     const now = new Date(Date.now());
-
     let timeToDeadline = deadline.getTime() - now.getTime();
 
     const daysToDeadline = Math.floor(timeToDeadline / DAY_IN_MILLISECONDS);
