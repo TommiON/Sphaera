@@ -8,6 +8,7 @@ import healthCheckRouter from "./routes/healthCheckRoutes";
 import clubRouter from "./routes/clubRoutes";
 import playerRouter from "./routes/playerRoutes";
 import calendarRouter from "./routes/calendarRoutes";
+import userAccountRouter from "./routes/userAccountRoutes";
 
 import { startScheduler } from "./domainEngine/time/scheduler";
 
@@ -20,6 +21,7 @@ app.use(healthCheckRouter);
 app.use(clubRouter);
 app.use(playerRouter);
 app.use(calendarRouter);
+app.use(userAccountRouter);
 
 const start = () => {
     appDataSource.initialize()
