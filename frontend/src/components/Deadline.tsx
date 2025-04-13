@@ -1,8 +1,9 @@
 import React from "react";
 
 import { formatDeadline } from "../utils/timeUtils";
+import { DeadlineData } from "../types/DeadlineData";
 
-const Deadline = ( { entry }) => {
+const Deadline = (entry: DeadlineData) => {
 
     let description;
     switch (entry.kind) {
@@ -18,6 +19,8 @@ const Deadline = ( { entry }) => {
         case 'match':
             description = 'Ottelu';
             break;
+        default:
+            description = '';
     }
 
     return(

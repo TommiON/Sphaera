@@ -6,7 +6,6 @@ import Players from './components/Players'
 import Deadlines from './components/Deadlines'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <Container fluid>
@@ -15,7 +14,7 @@ function App() {
           <Players clubId={1}/>
         </Col>
         <Col>
-          <Deadlines />
+          <Deadlines/>
         </Col>
       </Row>
     </Container>

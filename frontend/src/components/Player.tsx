@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, Table } from 'react-bootstrap';
 
-const Player = ({ playerData }) => {
-    const [minified, setMinified] = useState<boolean>(true);
+import { PlayerData } from '../types/PlayerData';
+
+const Player = (playerData: PlayerData) => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
 
     const fullTextForFootedness = (footedness: string) => {
