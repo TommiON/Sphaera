@@ -7,6 +7,7 @@ export const validateNewUserAccount = async (req: Request, res: Response, next: 
     let errors: ValidationError[] = [];
 
     const existingUsersWithSameName = await userAccountRepository.find({ where: { username: req.body.username }});
+    
     if (existingUsersWithSameName.length > 0) {
         errors.push('USERNAME_ALREADY_TAKEN');
     }
