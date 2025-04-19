@@ -1,6 +1,6 @@
 import express, {Express, Request, Response} from 'express';
 
-import { userAccountRepository } from '../repositories/repositories';
+import { userAccountRepository, clubRepository } from '../repositories/repositories';
 import { ValidationError } from './validationError';
 
 export const validateNewUserAccount = async (req: Request, res: Response, next: express.NextFunction) => {
@@ -20,8 +20,18 @@ export const validateNewUserAccount = async (req: Request, res: Response, next: 
         errors.push('PASSWORD_INSUFFICIENT');
     }
 
+    const existingClubsWithSameName = await clubRepository.find({ where: { name: req.body.clubname }});
+
+    if (existingClubsWithSameName.length > 0) {
+        errors.push('CLUBNAME_ALREADY_TAKEN');
+    }
+
+    if (!req.body.clubname || req.body.clubname < 4) {
+        errors.push('CLUBNAME_INSUFFICIENT');
+    }
+
     if (errors.length > 0) {
-        res.status(400).json(errors);
+        res.status(400).json({ 'errors': errors });
     } else {
         next();
     }

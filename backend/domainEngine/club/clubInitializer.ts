@@ -8,14 +8,17 @@ import { getRandomElement, getRandomNumberInRange } from "../../utils/randomizer
 import { transformEnumIntoStringList } from "../../utils/generalHelperFunctions";
 import { currentMoment } from "../../utils/timeUtils";
 import Trait from "../../domainObjects/player/trait";
+import UserAccountEntity from "../../entities/userAccount.entity";
 
-export const initAndSaveClub = async (proposedName: string): Promise<Club> => {
+export const initAndSaveClub = async (proposedName: string, forUser: UserAccountEntity): Promise<Club> => {
     let club = { 
         name: proposedName, 
         established: currentMoment()
     };
     
     const savedClub = await clubRepository.save(club) as ClubEntity;
+
+    await clubRepository.createQueryBuilder().relation(ClubEntity, 'account').of(club).set(forUser);
 
     for (let i = 0; i < gameParameters.CLUB_NUMBER_OF_PLAYERS_AT_START; i++) {
         await initAndSavePlayerForClub(savedClub, i+1);

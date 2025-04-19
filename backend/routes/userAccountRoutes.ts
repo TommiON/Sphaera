@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import { userAccountRepository } from '../repositories/repositories';
 import { validateNewUserAccount } from '../validators/newUserValidator';
 import { validateAuthentication } from '../validators/authenticationValidator';
+import { initAndSaveClub } from '../domainEngine/club/clubInitializer';
 
 const baseUrl = '/api/useraccount';
 const userAccountRouter = express.Router();
@@ -16,9 +17,14 @@ userAccountRouter.post(`${baseUrl}/`, validateNewUserAccount, async (req: Reques
         password: hashedPassword
     })
 
+    const newClub = await initAndSaveClub(req.body.clubname, newUser);
+
     const newUserWithoutPassword = { username: newUser.username};
 
-    res.json(newUserWithoutPassword);
+    res.json({ 
+        username: newUser.username,
+        club: newClub.name
+    });
 })
 
 // autentikointi sisäänkirjauduttaessa

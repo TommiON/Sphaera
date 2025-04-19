@@ -1,5 +1,6 @@
-import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany, OneToOne, JoinColumn } from "typeorm";
 import PlayerEntity from "./player.entity";
+import UserAccountEntity from "./userAccount.entity";
 
 @Entity('club')
 class ClubEntity {
@@ -10,7 +11,11 @@ class ClubEntity {
     name: string;
 
     @Column()
-    established: Date ;
+    established: Date;
+
+    @OneToOne(() => UserAccountEntity)
+    @JoinColumn()
+    account: UserAccountEntity
 
     @OneToMany(() => PlayerEntity, (player) => player.club)
     players: [PlayerEntity];
