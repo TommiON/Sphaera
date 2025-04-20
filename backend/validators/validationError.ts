@@ -6,7 +6,12 @@ export type ValidationError =
     'CLUBNAME_INSUFFICIENT'     |
     'CLUBNAME_ALREADY_TAKEN'    |
     
-    // autentikointi
+    // sisäänkirjautuminen
     'USERNAME_NOT_FOUND'        |
-    'PASSWORD_DOES_NOT_MATCH';
+    'PASSWORD_DOES_NOT_MATCH'   |
+
+    // kutsun JsonWebToken
+    'TOKEN_MISSING'             |
+    'TOKEN_MALFORMATTED'        |
+    'TOKEN_DOES_NOT_MATCH';
     
