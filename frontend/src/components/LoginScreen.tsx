@@ -3,8 +3,9 @@ import { Form, Button } from 'react-bootstrap';
 
 import { LoginData } from '../types/LoginData';
 import { login } from '../services/AuthenticationServices';
+import { LoggedUserData } from '../types/LoggedUserData';
 
-const LoginScreen = () => {
+const LoginScreen = ({ loginCallback }) => {
     const [loginData, setLoginData] = useState<LoginData>({ username: '', password: '' });
 
     const handleLoginFieldChange = (event: any) => {
@@ -17,7 +18,14 @@ const LoginScreen = () => {
     const handleLoginSubmit = (event: any) => {
         event.preventDefault();
         login(loginData)
-            .then(response => console.log('LOGIN:', response))
+            .then(response => {
+                const user: LoggedUserData = {
+                    username: response.data.username,
+                    clubid: response.data.clubId,
+                    token: response.data.token
+                }
+                loginCallback(user);
+            })
             .catch(error => console.log('Login-virhe:', error));
     }
 

@@ -6,7 +6,7 @@ import { validateToken } from '../validators/authenticationValidator';
 const baseUrl = '/api/calendar';
 const calendarRouter = express.Router();
 
-calendarRouter.get(`${baseUrl}/week`, validateToken, async (req: Request, res: Response) => {
+calendarRouter.get(`${baseUrl}/week`, async (req: Request, res: Response) => {
     const currentWeek = getCurrentGameweek();
     res.json(currentWeek);
 });

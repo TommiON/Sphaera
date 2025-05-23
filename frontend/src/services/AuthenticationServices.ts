@@ -8,3 +8,5 @@ const LOCAL_BASE_URL = 'useraccount';
 export const login = async (credentials: LoginData) => {
     return await axios.post(`${BACKEND_BASE_URL}/${LOCAL_BASE_URL}/login`, credentials);
 }
+
+// tähän signUp() uuden käyttäjän lisäämiseksi

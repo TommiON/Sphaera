@@ -9,25 +9,29 @@ import LoginScreen from './components/LoginScreen';
 function App() {
   const [loggedUser, setLoggedUser] = useState(undefined);
 
+  const logInUser = (userInfo) => {
+    setLoggedUser(userInfo);
+  }
+
   if (!loggedUser) {
     return(
       <Container fluid>
-          <LoginScreen />
+          <LoginScreen loginCallback={logInUser}/>
       </Container>
     )
   }
-
+  
   return (
-    <Container fluid>
-      <Row>
-        <Col>
-          <Players clubId={1}/>
-        </Col>
-        <Col>
-          <Deadlines/>
-        </Col>
-      </Row>
-    </Container>
+      <Container fluid>
+        <Row>
+          <Col>
+            <Players clubId={1}/>
+          </Col>
+          <Col>
+            <Deadlines/>
+          </Col>
+        </Row>
+      </Container>
   )
 }
 
