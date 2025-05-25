@@ -3,6 +3,7 @@ import { DataSource } from "typeorm";
 import environment from "./environment";
 import ClubEntity from "../entities/club.entity";
 import PlayerEntity from "../entities/player.entity";
+import UserAccountEntity from "../entities/userAccount.entity";
 
 const appDataSource = new DataSource({
     type: 'postgres',
@@ -12,7 +13,7 @@ const appDataSource = new DataSource({
     password: environment.dbPassword,
     synchronize: true,
     logging: false,
-    entities: [ClubEntity, PlayerEntity],
+    entities: [ClubEntity, PlayerEntity, UserAccountEntity],
     subscribers: [],
     migrations: []
 });

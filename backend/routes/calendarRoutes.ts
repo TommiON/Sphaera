@@ -1,5 +1,7 @@
 import express, {Express, Request, Response} from 'express';
+
 import { getCurrentGameweek } from '../domainEngine/time/scheduler';
+import { validateToken } from '../validators/authenticationValidator';
 
 const baseUrl = '/api/calendar';
 const calendarRouter = express.Router();
