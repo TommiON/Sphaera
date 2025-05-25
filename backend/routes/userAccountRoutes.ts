@@ -5,7 +5,7 @@ import { userAccountRepository, clubRepository } from '../repositories/repositor
 import { validateNewUserAccount } from '../validators/newUserValidator';
 import { validateLogin, validateToken } from '../validators/authenticationValidator';
 import { initAndSaveClub } from '../domainEngine/club/clubInitializer';
-import { generateTokenForUser } from '../utils/authenticationUtils';
+import { generateAuthenticationToken } from '../utils/authenticationUtils';
 
 const baseUrl = '/api/useraccount';
 const userAccountRouter = express.Router();
@@ -28,7 +28,7 @@ userAccountRouter.post(`${baseUrl}/`, validateNewUserAccount, async (req: Reques
 
 // sisäänkirjautuminen
 userAccountRouter.post(`${baseUrl}/login/`, validateLogin, async (req: Request, res: Response) => {
-    const usersClubId = await clubRepository.findOne({
+    const usersClub = await clubRepository.findOne({
         select: {
             id: true,
             name: true
@@ -45,9 +45,9 @@ userAccountRouter.post(`${baseUrl}/login/`, validateLogin, async (req: Request, 
 
     res.json({
         username:   req.body.username,
-        clubid:     usersClubId?.id,
-        clubname:   usersClubId?.name,
-        token:      generateTokenForUser(req.body.username)
+        clubid:     usersClub?.id,
+        clubname:   usersClub?.name,
+        token:      generateAuthenticationToken(req.body.username, usersClub?.id)
     });
 })
 

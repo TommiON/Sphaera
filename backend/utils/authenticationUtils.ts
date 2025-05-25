@@ -2,8 +2,11 @@ import jsonwebtoken from 'jsonwebtoken';
 
 import environment from '../config/environment';
 
-export const generateTokenForUser = (username: string): string => {
-    const userForToken = { name: username };
+export const generateAuthenticationToken = (username: string, clubId: number | undefined): string => {
+    const authenticatedEntity = {
+        username: username,
+        clubId: clubId
+    };
     
-    return jsonwebtoken.sign(userForToken, environment.tokenSecret as string);
+    return jsonwebtoken.sign(authenticatedEntity, environment.tokenSecret as string);
 }

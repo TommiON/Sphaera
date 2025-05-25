@@ -5,7 +5,7 @@ import { LoginData } from '../types/LoginData';
 import { login } from '../services/AuthenticationServices';
 import { LoggedUserData } from '../types/LoggedUserData';
 
-const LoginScreen = ({ loginCallback }) => {
+const LoginScreen = ({loginCallback}: {loginCallback: Function}) => {
     const [loginData, setLoginData] = useState<LoginData>({ username: '', password: '' });
 
     const handleLoginFieldChange = (event: any) => {
@@ -19,14 +19,16 @@ const LoginScreen = ({ loginCallback }) => {
         event.preventDefault();
         login(loginData)
             .then(response => {
+                console.log('*** login response:', response)
                 const user: LoggedUserData = {
                     username: response.data.username,
-                    clubid: response.data.clubId,
+                    clubid: response.data.clubid,
                     token: response.data.token
                 }
                 loginCallback(user);
             })
-            .catch(error => console.log('Login-virhe:', error));
+            .catch(error => 
+                console.log('Login-virhe:', error));
     }
 
     return(
