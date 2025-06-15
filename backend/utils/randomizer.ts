@@ -51,7 +51,6 @@ export function getRandomElement(elements: any[], distributionWeights?: number[]
     }
 }
 
-
 export function getRandomNumberInRange(floor: number, ceiling: number): number {
     const randomNumber = Math.random() * 100;
     const stepTresholdPercentage = 100.0 / (ceiling - floor);
@@ -64,4 +63,17 @@ export function getRandomNumberInRange(floor: number, ceiling: number): number {
     }
 
     return floor + increment;
+}
+
+export function shuffleCollectionRandomly(elements: any[]): any[] {
+    let originalElements: any[] = JSON.parse(JSON.stringify(elements));
+    let shuffledElements: any[] = [];
+
+    while (originalElements.length > 0) {
+        const randomIndex = getRandomNumberInRange(0, originalElements.length);
+        const pickedElement = originalElements.splice(randomIndex, 1);
+        shuffledElements.push(pickedElement[0]);
+    }
+
+    return shuffledElements;
 }
