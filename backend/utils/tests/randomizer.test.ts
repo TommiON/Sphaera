@@ -2,7 +2,7 @@ import { shuffleCollectionRandomly, getRandomNumberInRange, getRandomElement } f
 
 const testArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
 
-test('testShuffleCollectionRandomly', () => {
+test('randomizer / shuffle collection randomly', () => {
     for (let i = 0; i < 5; i++) {
         const result = shuffleCollectionRandomly(testArray);
         expect(result.length).toEqual(testArray.length);
@@ -13,7 +13,7 @@ test('testShuffleCollectionRandomly', () => {
 
 // jos aikaa, testeistä voisi tehdä paremmat jonkinlaisella montecarlolla?
 
-test('testGetRandomNumberInRange', () => {
+test('randomizer / get random number in range', () => {
     for (let i = 0; i < 100; i++) {
         const result = getRandomNumberInRange(0,10);
         expect(result).toBeGreaterThanOrEqual(0);
@@ -21,7 +21,7 @@ test('testGetRandomNumberInRange', () => {
     }
 })
 
-test('testGetRandomElement', () => {
+test('randomizer / get random element', () => {
     for (let i = 0; i < 50; i++) {
         const flatResult = getRandomElement(testArray);
         expect(testArray.includes(flatResult)).toBeTruthy;
