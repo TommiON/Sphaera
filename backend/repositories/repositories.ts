@@ -9,3 +9,6 @@ export const playerRepository = appDataSource.getRepository(PlayerEntity);
 import UserAccountEntity from '../entities/userAccount.entity';
 export const userAccountRepository = appDataSource.getRepository(UserAccountEntity);
 
+import TimekeeperEntity from '../entities/timekeeper.entity';
+export const timekeeperRepository = appDataSource.getRepository(TimekeeperEntity);
+

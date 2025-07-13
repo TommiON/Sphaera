@@ -4,6 +4,7 @@ import environment from "./environment";
 import ClubEntity from "../entities/club.entity";
 import PlayerEntity from "../entities/player.entity";
 import UserAccountEntity from "../entities/userAccount.entity";
+import TimekeeperEntity from "../entities/timekeeper.entity";
 
 const appDataSource = new DataSource({
     type: 'postgres',
@@ -13,7 +14,7 @@ const appDataSource = new DataSource({
     password: environment.dbPassword,
     synchronize: true,
     logging: false,
-    entities: [ClubEntity, PlayerEntity, UserAccountEntity],
+    entities: [ClubEntity, PlayerEntity, UserAccountEntity, TimekeeperEntity],
     subscribers: [],
     migrations: []
 });
