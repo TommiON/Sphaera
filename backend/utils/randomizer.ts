@@ -51,6 +51,14 @@ export function getRandomElement(elements: any[], distributionWeights?: number[]
     }
 }
 
+export const getRandomElementFromSet = (elements: Set<any>): any => {
+    const elementsAsList: any[] = [];
+
+    elements.forEach(e => elementsAsList.push(e));
+
+    return getRandomElement(elementsAsList);
+}
+
 export function getRandomNumberInRange(floor: number, ceiling: number): number {
     const randomNumber = Math.random() * 100;
     const stepTresholdPercentage = 100.0 / (ceiling - floor);

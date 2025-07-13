@@ -1,4 +1,4 @@
-import { shuffleCollectionRandomly, getRandomNumberInRange, getRandomElement } from "../randomizer";
+import { shuffleCollectionRandomly, getRandomNumberInRange, getRandomElement, getRandomElementFromSet } from "../randomizer";
 
 const testArray = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
 
@@ -29,4 +29,14 @@ test('randomizer / get random element', () => {
         const weightedResult = getRandomElement(testArray, [10,10,10]);
         expect(testArray.includes(weightedResult)).toBeTruthy;
     }
+
+    const singletonArray = ['1'];
+    for (let i = 0; i < 10; i++) {
+        const result = getRandomElement(singletonArray);
+        expect(result).toStrictEqual('1');
+    }
+
+    const emptyArray: any[] = [];
+    const result = getRandomElement(emptyArray);
+    expect(result).toBeUndefined;
 })
