@@ -12,16 +12,16 @@ class TimekeeperEntity {
     week: number;
 
     @Column()
-    financesDone: boolean;
+    finances: boolean;
 
     @Column()
-    transferDone: boolean;
+    transfer: boolean;
 
     @Column()
-    trainingDone: boolean;
+    training: boolean;
 
     @Column()
-    matchDone: boolean;
+    match: boolean;
 }
 
 export default TimekeeperEntity
