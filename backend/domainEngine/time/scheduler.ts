@@ -1,7 +1,8 @@
 import Gameweek from "../../domainObjects/time/gameweek";
 import { hasExpired } from "../../utils/timeUtils";
+import environment from "../../config/environment";
 
-const clockInterval = 5 * 1000;
+const clockInterval = environment.clockInterval as number;
 let gameweeks: Gameweek[] = [];
 let weekIndexing = 0;
 

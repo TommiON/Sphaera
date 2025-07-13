@@ -4,8 +4,12 @@ dotenv.config();
 
 export default {
     port:           process.env.PORT || 3000,
+
     dbPassword:     process.env.DB_PASSWORD,
     dbUsername:     process.env.DB_USERNAME,
     dbHost:         process.env.DB_HOST || 'localhost',
-    tokenSecret:    process.env.TOKEN_SECRET
+
+    tokenSecret:    process.env.TOKEN_SECRET,
+
+    clockInterval:  process.env.CLOCK_INTERVAL || 5000
 }
