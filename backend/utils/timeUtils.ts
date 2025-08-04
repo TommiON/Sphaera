@@ -9,14 +9,21 @@ export function currentMoment(): Date {
 }
 
 export function currentMomentPlusGameWeek(): Date {
-    return new Date(Date.now() + gameWeekInMilliseconds);
+    return plusGameWeekFromMoment(currentMoment());
 }
 
 export function currentMomentPlusGameDays(days: number): Date {
-    return new Date(Date.now() + (days * gameDayInMilliseconds));
+    return plusGameDaysFromMoment(currentMoment(), days);
+}
+
+export function plusGameWeekFromMoment(startDate: Date): Date {
+    return new Date(startDate.getTime() + gameWeekInMilliseconds);
+}
+
+export function plusGameDaysFromMoment(startDate: Date, days: number): Date {
+    return new Date(startDate.getTime() + (days * gameDayInMilliseconds));
 }
 
 export function hasExpired(target: Date): boolean {
     return Date.now() >= target.getTime();
 }
-
