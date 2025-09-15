@@ -22,6 +22,9 @@ class TimekeeperEntity {
 
     @Column()
     match: boolean;
+
+    @Column()
+    lastWeekEnd: Date;
 }
 
 export default TimekeeperEntity

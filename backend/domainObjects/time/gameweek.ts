@@ -1,40 +1,56 @@
 import Deadline from "./deadline";
-import { currentMoment, currentMomentPlusGameWeek, currentMomentPlusGameDays } from "../../utils/timeUtils";
+import ArchivedPointInTime from "./archivedPointInTime";
+import { currentMoment, currentMomentPlusGameWeek, currentMomentPlusGameDays, plusGameWeekFromMoment, plusGameDaysFromMoment} from "../../utils/timeUtils";
 
 class Gameweek {
-    ordinal: number;
     start: Date;
     end: Date;
     deadlines: Deadline[] = [];
 
-    constructor(nextOrdinal: number) {
-        this.ordinal = nextOrdinal;
-        this.start = currentMoment();
-        this.end = currentMomentPlusGameWeek();
+    constructor(resumeFromTime?: ArchivedPointInTime) {
+        if (resumeFromTime) {
+            this.start = resumeFromTime.lastWeekEnd;
+            this.end = plusGameWeekFromMoment(this.start);
+            console.log('Uusi viikko arkistosta, alku ', this.start, 'ja loppu', this.end)
+        } else {
+            this.start = currentMoment();
+            this.end = plusGameWeekFromMoment(this.start);
+            console.log('Uusi neitseellinen viikko, alku', this.start, 'ja loppu', this.end)
+        }
+        
+        if (!resumeFromTime || (resumeFromTime && !resumeFromTime.financesDone)) {
+            this.deadlines.push({
+                kind: 'finances',
+                due: plusGameDaysFromMoment(this.start, 2),
+                expirationCallback: () => {}
+            });
+        }
 
-        this.deadlines.push({
-            kind: 'finances',
-            due: currentMomentPlusGameDays(2),
-            expirationCallback: () => {}
-        });
+        if (!resumeFromTime || (resumeFromTime && !resumeFromTime.transferDone)) {
+            this.deadlines.push({
+                kind: 'transfer',
+                due: plusGameDaysFromMoment(this.start, 3),
+                expirationCallback: () => {}
+            });
+        }
+        
+        if (!resumeFromTime || (resumeFromTime && !resumeFromTime.trainingDone)) {
+            this.deadlines.push({
+                kind: 'training',
+                due: plusGameDaysFromMoment(this.start, 4),
+                expirationCallback: () => {}
+            });
+        }
 
-        this.deadlines.push({
-            kind: 'transfer',
-            due: currentMomentPlusGameDays(3),
-            expirationCallback: () => {}
-        });
+        if (!resumeFromTime || (resumeFromTime && !resumeFromTime.matchDone)) {
+            this.deadlines.push({
+                kind: 'match',
+                due: plusGameDaysFromMoment(this.start, 6),
+                expirationCallback: () => {}
+            });
+        }
 
-        this.deadlines.push({
-            kind: 'training',
-            due: currentMomentPlusGameDays(4),
-            expirationCallback: () => {}
-        });
-
-        this.deadlines.push({
-            kind: 'match',
-            due: currentMomentPlusGameDays(6),
-            expirationCallback: () => {}
-        });
+        console.log('Viikon dedikset', this.deadlines)
     }
 }
 
