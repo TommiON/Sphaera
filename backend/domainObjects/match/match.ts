@@ -4,8 +4,10 @@ import MatchEvent from "./matchEvent";
 export default class Match {
     homeTeam: Club;
     awayTeam: Club;
-    startTime: Date;
-    started: boolean;
-    ended: boolean;
-    event: MatchEvent[];
+    startTime: Date | null = null;
+    started: boolean = false;
+    ended: boolean = false;
+    events: MatchEvent[] = [];
+
+    // suorituskykysyistä myös lopputulos suoraan tähän, vaikka voitaisiinkin laksea MatchEventeistä?
 }
