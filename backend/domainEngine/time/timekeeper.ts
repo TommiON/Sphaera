@@ -26,20 +26,33 @@ export const getArchivedTime = async (): Promise<ArchivedPointInTime|null> => {
 
 export const setArchivedTime = async (updatedValues: ArchivedPointInTime) => {
     const maxId = await getTablesMaxId();
-    const updatedResult = await timekeeperRepository
-        .createQueryBuilder()
-        .update(TimekeeperEntity)
-        .set({
-            season: updatedValues.season,
-            week: updatedValues.week,
-            finances: updatedValues.financesDone,
-            transfer: updatedValues.transferDone,
-            training: updatedValues.trainingDone,
-            match: updatedValues.matchDone,
-            lastWeekEnd: updatedValues.lastWeekEnd
+    if (maxId) {
+         await timekeeperRepository
+            .createQueryBuilder()
+            .update(TimekeeperEntity)
+            .set({
+                season: updatedValues.season,
+                week: updatedValues.week,
+                finances: updatedValues.financesDone,
+                transfer: updatedValues.transferDone,
+                training: updatedValues.trainingDone,
+                match: updatedValues.matchDone,
+                lastWeekEnd: updatedValues.lastWeekEnd
+            })
+            .where("id = :id", { id: maxId })
+            .execute();
+    } else {
+        await timekeeperRepository.save({
+                season: updatedValues.season,
+                week: updatedValues.week,
+                finances: updatedValues.financesDone,
+                transfer: updatedValues.transferDone,
+                training: updatedValues.trainingDone,
+                match: updatedValues.matchDone,
+                lastWeekEnd: updatedValues.lastWeekEnd
         })
-        .where("id = :id", { id: maxId })
-        .execute();
+    }
+   
 }
 
 const getTablesMaxId = async (): Promise<number|null> => {

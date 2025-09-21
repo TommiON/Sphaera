@@ -11,11 +11,9 @@ class Gameweek {
         if (resumeFromTime) {
             this.start = resumeFromTime.lastWeekEnd;
             this.end = plusGameWeekFromMoment(this.start);
-            console.log('Uusi viikko arkistosta, alku ', this.start, 'ja loppu', this.end)
         } else {
             this.start = currentMoment();
             this.end = plusGameWeekFromMoment(this.start);
-            console.log('Uusi neitseellinen viikko, alku', this.start, 'ja loppu', this.end)
         }
         
         if (!resumeFromTime || (resumeFromTime && !resumeFromTime.financesDone)) {

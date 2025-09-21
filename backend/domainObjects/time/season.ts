@@ -7,15 +7,12 @@ export default class Season {
 
     constructor(previousSeason: Season|null, resumeFromTime: ArchivedPointInTime|null) {
         if (!previousSeason && !resumeFromTime) {
-            console.log('X Uusi kausi tyhjästä')
             this.seasonNumber = 1;
             this.weekNumber = 1;
         } else if (previousSeason) {
-            console.log('X Uusi kausi aiemman pohjalta')
-            this.seasonNumber = previousSeason.seasonNumber++;
+            this.seasonNumber = previousSeason.seasonNumber + 1;
             this.weekNumber = 1;
         } else if (resumeFromTime) {
-            console.log('X Palautetaan kausi arkiston arvoista', resumeFromTime)
             this.seasonNumber = resumeFromTime.season;
             this.weekNumber = resumeFromTime.week;
         }

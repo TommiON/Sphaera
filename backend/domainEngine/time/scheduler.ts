@@ -23,7 +23,6 @@ export const startScheduler = () => {
             if (hasExpired(deadline.due)) {
                 deadline.expirationCallback();
                 currentWeek.deadlines = currentWeek.deadlines.filter(d => d.kind != deadline.kind);
-
                 updateArchivedTime(currentSeason, currentWeek)
             }
         });
@@ -33,30 +32,20 @@ export const startScheduler = () => {
 
 const start = async () => {
     const archivedTime: ArchivedPointInTime|null = await getArchivedTime();
-
     if (archivedTime) {
-        resumeSeason(archivedTime);
+        currentSeason = new Season(null, archivedTime);
+        currentWeek = new Gameweek(archivedTime);
     } else {
-        startNextSeason();
+        currentSeason = new Season(null, null);
+        currentWeek = new Gameweek(); 
     }
 }
 
-const startNextSeason = () => {
-    if (currentSeason) currentSeason.wrapUp();
-
-    // huom ei välttämättä toimi
-    currentSeason = new Season(currentSeason, null);
-    startNextWeek();
-}
-
-const resumeSeason = async (startingPoint: ArchivedPointInTime) => {
-    currentSeason = new Season(null, startingPoint);
-    currentWeek = new Gameweek(startingPoint);
-}
-
-const startNextWeek = () => {
-    if (currentSeason.isAboutToEnd()) {
-        startNextSeason();
+const startNextWeek = () => {    
+    if (currentSeason.isAboutToEnd()) {       
+        currentSeason.wrapUp();
+        currentSeason = new Season(currentSeason, null);
+        currentWeek = new Gameweek();
     } else {
         currentSeason.weekNumber++;
         currentWeek = new Gameweek();        
