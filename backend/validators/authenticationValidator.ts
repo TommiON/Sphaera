@@ -15,8 +15,8 @@ export const validateLogin = async (req: Request, res: Response, next: express.N
         errors.push('USERNAME_NOT_FOUND');
     } else {
         const userAccount = userAccounts[0];
-        const correctPassword = await bcrypt.compare(req.body.password, userAccount.password);
-        if (!correctPassword) {
+        const isPasswordCorrect: boolean = await bcrypt.compare(req.body.password, userAccount.password);
+        if (!isPasswordCorrect) {
             errors.push('PASSWORD_DOES_NOT_MATCH');
         }
     }
@@ -61,8 +61,6 @@ export const validateClubRequest = async (req: Request, res: Response, next: exp
 
     const clubIdFromAuthenticatedEntity = res.locals.authenticatedEntity.clubId;
     const clubIdFromRequestURL = parseInt(req.params.clubId);
-
-    console.log('* backin pyyntövalidaatio vertailee, tokenista', clubIdFromAuthenticatedEntity, 'ja pyynnöstä', clubIdFromRequestURL)
 
     if (!clubIdFromRequestURL || isNaN(clubIdFromRequestURL)) {
         errors.push('URL_PARAMETER_MALFORMATTED');
