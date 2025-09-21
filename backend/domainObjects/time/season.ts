@@ -1,5 +1,6 @@
 import gameParameters from "../../domainProperties/gameParameters";
 import ArchivedPointInTime from "./archivedPointInTime";
+import { organizeNewSeason } from "../../domainEngine/organizer/organizeNewSeason";
 
 export default class Season {
     seasonNumber: number;
@@ -16,8 +17,8 @@ export default class Season {
             this.seasonNumber = resumeFromTime.season;
             this.weekNumber = resumeFromTime.week;
         }
-        
-            // tänne uuden kauden käynnistykseen liittyvä logiikka, tai kutsut siihen
+     
+        organizeNewSeason(this.seasonNumber);
     }
 
     isAboutToEnd = (): boolean => {
