@@ -8,28 +8,25 @@ import { generateFixtures } from "../../domainEngine/league/fixtureGenerator";
 export default class LeagueSeason {
     league: League;
     ordinal: number;
-    standings: Standing[];
+    teams: Club[];
+    //standings: Standing[];
     fixtures: Match[];
-    started: boolean = false;
-    finished: boolean = false;
+    started: boolean;
+    finished: boolean;
 
-    constructor(participants: Club[]) {
-        if (participants.length !== gameParameters.LEAGUE_NUMBER_OF_TEAMS) return;
+    constructor(participants: Club[], seasonNumber: number) {
+        if (participants.length !== gameParameters.LEAGUE_NUMBER_OF_TEAMS) return; // virheenkäsittelyt paremmiksi poikkeuksilla
 
-        participants.forEach(participant => {
-            this.standings.push({
-                team: participant,
-                won: 0,
-                drawn: 0,
-                lost: 0,
-                goalsFor: 0,
-                goalsAgainst: 0,
-                points: 0
-            })
-        });
-
-        this.fixtures = generateFixtures(participants);
-
+        this.teams = participants;
+        this.fixtures = generateFixtures(this.teams);
+        this.ordinal = seasonNumber;
         this.started = true;
+        this.finished = false;
     }
+
+    /*
+    getStandings = (): Standing[] => {
+        
+    }
+    */
 } 

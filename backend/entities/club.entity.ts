@@ -22,6 +22,7 @@ class ClubEntity {
     players: [PlayerEntity];
 
     @ManyToOne(() => LeagueSeasonEntity, (leagueSeason) => leagueSeason.teams)
+    @JoinColumn()
     leagueSeason: LeagueSeasonEntity;
 }
 
