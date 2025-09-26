@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, Entity, OneToMany, OneToOne, JoinColumn } from "typeorm"; 
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany, OneToOne, JoinColumn, ManyToMany } from "typeorm"; 
 import ClubEntity from "./club.entity";
 
 @Entity('leagueseason')
@@ -9,7 +9,7 @@ class LeagueSeasonEntity {
     @Column()
     ordinal: number;
 
-    @OneToMany(() => ClubEntity, (team) => team.leagueSeason)
+    @ManyToMany(() => ClubEntity, (team) => team.leagueSeason)
     teams: [ClubEntity];
 
     /*

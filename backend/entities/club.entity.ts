@@ -1,4 +1,4 @@
-import { PrimaryGeneratedColumn, Column, Entity, OneToMany, OneToOne, JoinColumn, ManyToOne } from "typeorm";
+import { PrimaryGeneratedColumn, Column, Entity, OneToMany, OneToOne, JoinColumn, ManyToOne, ManyToMany, JoinTable } from "typeorm";
 import PlayerEntity from "./player.entity";
 import UserAccountEntity from "./userAccount.entity";
 import LeagueSeasonEntity from "./leagueSeason.entity";
@@ -21,8 +21,8 @@ class ClubEntity {
     @OneToMany(() => PlayerEntity, (player) => player.club)
     players: [PlayerEntity];
 
-    @ManyToOne(() => LeagueSeasonEntity, (leagueSeason) => leagueSeason.teams)
-    @JoinColumn()
+    @ManyToMany(() => LeagueSeasonEntity, (leagueSeason) => leagueSeason.teams)
+    @JoinTable({name: 'club_leagueseason'})
     leagueSeason: LeagueSeasonEntity;
 }
 
