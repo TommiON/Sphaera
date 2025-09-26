@@ -3,6 +3,7 @@ import { getRandomElement } from "../../../utils/randomizer";
 import Club from "../../../domainObjects/club/club";
 import Match from "../../../domainObjects/match/match";
 
+//const NUMBER_OF_TEST_TEAMS = 8;
 const NUMBER_OF_TEST_TEAMS = 20;
 const NUMBER_OF_MATCHES_PER_ROUND = NUMBER_OF_TEST_TEAMS / 2;
 const NUMBER_OF_ROUNDS = (NUMBER_OF_TEST_TEAMS - 1) * 2;
@@ -66,10 +67,8 @@ const printByRounds = (fixtures: Match[]) => {
     console.log('Otteluita yhteensä', fixtures.length)
 
     for (let round = 1; round <= NUMBER_OF_ROUNDS; round++) {
-        console.log('KIERROS', round);
-
         fixtures.slice(startIndex, startIndex + NUMBER_OF_MATCHES_PER_ROUND).forEach(fixture =>
-            console.log(fixture.homeTeam.name, 'vs', fixture.awayTeam.name)
+            console.log(fixture.homeTeam.name, 'vs', fixture.awayTeam.name, 'viikolla', fixture.weekNumber)
         );
         
         startIndex += NUMBER_OF_MATCHES_PER_ROUND;

@@ -10,6 +10,8 @@ export const generateFixtures = (teams: Club[]): Match[] => {
     const rounds = (teams.length - 1) * 2;
     const totalMatches = matchesPerRound * rounds;
 
+    let week = 1;
+
     while(fixtures.length < totalMatches) {
         let homeCandidates = new Set(teams);
         let awayCandidates = new Set(teams);
@@ -38,6 +40,8 @@ export const generateFixtures = (teams: Club[]): Match[] => {
                 const fixture = new Match();
                 fixture.homeTeam = hometeam;
                 fixture.awayTeam = awayteam;
+                fixture.weekNumber = week;
+
                 fixtures.push(fixture);
 
                 homeCandidates.delete(awayteam);
@@ -47,6 +51,8 @@ export const generateFixtures = (teams: Club[]): Match[] => {
                 awayCandidates.add(hometeam);
             }
         }
+
+        week++;
     }
 
     return fixtures;
