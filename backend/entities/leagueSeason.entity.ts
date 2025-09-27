@@ -1,5 +1,6 @@
 import { PrimaryGeneratedColumn, Column, Entity, OneToMany, OneToOne, JoinColumn, ManyToMany } from "typeorm"; 
 import ClubEntity from "./club.entity";
+import MatchEntity from "./match.entity";
 
 @Entity('leagueseason')
 class LeagueSeasonEntity {
@@ -12,10 +13,8 @@ class LeagueSeasonEntity {
     @ManyToMany(() => ClubEntity, (team) => team.leagueSeason)
     teams: [ClubEntity];
 
-    /*
-    @OneToMany()
-    ottelut
-    */
+    @OneToMany(() => MatchEntity, (match) => match.leagueSeason)
+    matches: [MatchEntity];
 
     @Column()
     started: boolean;

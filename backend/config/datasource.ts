@@ -6,6 +6,7 @@ import PlayerEntity from "../entities/player.entity";
 import UserAccountEntity from "../entities/userAccount.entity";
 import TimekeeperEntity from "../entities/timekeeper.entity";
 import LeagueSeasonEntity from "../entities/leagueSeason.entity";
+import MatchEntity from "../entities/match.entity";
 
 const appDataSource = new DataSource({
     type: 'postgres',
@@ -20,7 +21,8 @@ const appDataSource = new DataSource({
         PlayerEntity,
         UserAccountEntity,
         TimekeeperEntity,
-        LeagueSeasonEntity],
+        LeagueSeasonEntity,
+        MatchEntity],
     subscribers: [],
     migrations: []
 });

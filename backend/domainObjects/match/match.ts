@@ -8,6 +8,4 @@ export default class Match {
     started: boolean = false;
     ended: boolean = false;
     events: MatchEvent[] = [];
-
-    // suorituskykysyistä myös lopputulos suoraan tähän, vaikka voitaisiinkin laksea MatchEventeistä?
 }

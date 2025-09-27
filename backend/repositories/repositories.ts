@@ -15,3 +15,6 @@ export const timekeeperRepository = appDataSource.getRepository(TimekeeperEntity
 import LeagueSeasonEntity from '../entities/leagueSeason.entity';
 export const leagueSeasonRepository = appDataSource.getRepository(LeagueSeasonEntity);
 
+import MatchEntity from '../entities/match.entity';
+export const matchEntity = appDataSource.getRepository(MatchEntity);
+
