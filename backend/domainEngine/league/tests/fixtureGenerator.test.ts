@@ -68,7 +68,7 @@ const printByRounds = (fixtures: Match[]) => {
 
     for (let round = 1; round <= NUMBER_OF_ROUNDS; round++) {
         fixtures.slice(startIndex, startIndex + NUMBER_OF_MATCHES_PER_ROUND).forEach(fixture =>
-            console.log(fixture.homeTeam.name, 'vs', fixture.awayTeam.name, 'viikolla', fixture.weekNumber)
+            console.log(fixture.homeTeam.name, 'vs', fixture.awayTeam.name, 'viikolla', fixture.week)
         );
         
         startIndex += NUMBER_OF_MATCHES_PER_ROUND;

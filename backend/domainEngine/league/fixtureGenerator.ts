@@ -40,7 +40,7 @@ export const generateFixtures = (teams: Club[]): Match[] => {
                 const fixture = new Match();
                 fixture.homeTeam = hometeam;
                 fixture.awayTeam = awayteam;
-                fixture.weekNumber = week;
+                fixture.week = week;
 
                 fixtures.push(fixture);
 
