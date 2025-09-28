@@ -10,11 +10,11 @@ class MatchEntity {
     @Column()
     week: number
 
-    @OneToOne(() => ClubEntity)
+    @ManyToOne(() => ClubEntity)
     @JoinColumn()
     homeTeam: ClubEntity
 
-    @OneToOne(() => ClubEntity)
+    @ManyToOne(() => ClubEntity)
     @JoinColumn()
     awayTeam: ClubEntity
 

@@ -6,20 +6,21 @@ import gameParameters from "../../domainProperties/gameParameters";
 import { generateFixtures } from "../../domainEngine/league/fixtureGenerator";
 
 export default class LeagueSeason {
-    league: League;
+    division: number;
     ordinal: number;
     teams: Club[];
     //standings: Standing[];
-    fixtures: Match[];
+    matches: Match[];
     started: boolean;
     finished: boolean;
 
-    constructor(participants: Club[], seasonNumber: number) {
+    constructor(participants: Club[], seasonNumber: number, divisionNumber: number) {
         if (participants.length !== gameParameters.LEAGUE_NUMBER_OF_TEAMS) return; // virheenkäsittelyt paremmiksi poikkeuksilla
 
         this.teams = participants;
-        this.fixtures = generateFixtures(this.teams);
+        this.matches = generateFixtures(this.teams);
         this.ordinal = seasonNumber;
+        this.division = divisionNumber;
         this.started = true;
         this.finished = false;
     }

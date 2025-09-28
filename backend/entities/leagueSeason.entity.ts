@@ -10,10 +10,13 @@ class LeagueSeasonEntity {
     @Column()
     ordinal: number;
 
+    @Column()
+    division: number;
+
     @ManyToMany(() => ClubEntity, (team) => team.leagueSeason)
     teams: [ClubEntity];
 
-    @OneToMany(() => MatchEntity, (match) => match.leagueSeason)
+    @OneToMany(() => MatchEntity, (match) => match.leagueSeason, {cascade: true})
     matches: [MatchEntity];
 
     @Column()

@@ -4,8 +4,8 @@ import MatchEvent from "./matchEvent";
 export default class Match {
     homeTeam: Club;
     awayTeam: Club;
-    weekNumber: number;
+    week: number;
     started: boolean = false;
     ended: boolean = false;
-    events: MatchEvent[] = [];
+    //events: MatchEvent[] = [];
 }
