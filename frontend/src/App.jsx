@@ -5,12 +5,14 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Players from './components/Players';
 import Deadlines from './components/Deadlines';
 import LoginScreen from './components/LoginScreen';
+import MainBar from './components/MainBar';
 import { setupUserInLocalStorage, wipeCurrentUserFromLocalStorage } from './utils/authenticationUtils';
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(undefined);
 
   const login = (userInfo) => {
+      console.log('USERINFO: ', userInfo);
       setupUserInLocalStorage(userInfo);
       setLoggedUser(userInfo);
   }
@@ -25,6 +27,7 @@ function App() {
 
   return (
       <Container fluid>
+        <MainBar />
         <Row>
           <Col>
             <Players clubId={loggedUser.clubid}/>
