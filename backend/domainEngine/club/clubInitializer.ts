@@ -10,7 +10,8 @@ import { currentMoment } from "../../utils/timeUtils";
 import Trait from "../../domainObjects/player/trait";
 import UserAccountEntity from "../../entities/userAccount.entity";
 
-export const initAndSaveClub = async (proposedName: string, forUser: UserAccountEntity): Promise<Club> => {
+/* Create a user club */
+export const initAndSaveClub = async (proposedName: string, forUser?: UserAccountEntity): Promise<Club> => {
     let club = { 
         name: proposedName, 
         established: currentMoment()
@@ -18,13 +19,20 @@ export const initAndSaveClub = async (proposedName: string, forUser: UserAccount
     
     const savedClub = await clubRepository.save(club) as ClubEntity;
 
-    await clubRepository.createQueryBuilder().relation(ClubEntity, 'account').of(club).set(forUser);
+    if (forUser) {
+        await clubRepository.createQueryBuilder().relation(ClubEntity, 'account').of(savedClub).set(forUser);
+    }
 
     for (let i = 0; i < gameParameters.CLUB_NUMBER_OF_PLAYERS_AT_START; i++) {
         await initAndSavePlayerForClub(savedClub, i+1);
     }
 
     return club;
+}
+
+/* Create an automated 'zombie' club for filler purposes */
+export const initAndSaveZombieClub = async (): Promise<Club> => {
+    return await initAndSaveClub('Automatisoitu joukkue ' + getRandomNumberInRange(1000,100000), undefined)
 }
 
 const initAndSavePlayerForClub = async (club: ClubEntity, runningPlayingNumber: number) => {
